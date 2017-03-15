@@ -1233,13 +1233,6 @@ $(function() {
 			params = params.search(true);
 			// Possible parameters:  name, host, port, password, tls, nick, username, realname, join
 
-			var user = window.localStorage.getItem("user");
-			if (user) {
-				_.defaults(params, {'nick': user});
-				_.defaults(params, {'username': user});
-				_.defaults(params, {'realname': user});
-			}
-			
 			// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in#Iterating_over_own_properties_only
 			for (var key in params) {
 				if (params.hasOwnProperty(key)) {
@@ -1259,6 +1252,13 @@ $(function() {
 				}
 			}
 		});
+	} else {
+		var user = window.localStorage.getItem("user");
+		if (user) {
+			$("#connect input[name='nick']").val(user);
+			$("#connect input[name='username']").val(user);
+			$("#connect input[name='realname']").val(user.charAt(0).toUpperCase() + user.slice(1));
+		}
 	}
 
 	forms.on("submit", "form", function(e) {
