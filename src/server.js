@@ -297,9 +297,11 @@ function ldapAuth(client, user, password, callback) {
 	}
 	var userDN = user.replace(/([,\\/#+<>;"= ])/g, "\\$1");
 	var bindDN = Helper.config.ldap.primaryKey + "=" + userDN + "," + Helper.config.ldap.baseDN;
+	log.info("Auth against LDAP ", Helper.config.ldap.url, " with bindDN ", bindDN);
 
 	var ldapclient = ldap.createClient({
-		url: Helper.config.ldap.url
+		url: Helper.config.ldap.url,
+		tlsOptions: Helper.config.ldap.tlsOptions
 	});
 
 	ldapclient.on("error", function(err) {
