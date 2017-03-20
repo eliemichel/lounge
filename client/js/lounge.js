@@ -1361,7 +1361,7 @@ $(function() {
 		var nicks = users.data("nicks");
 
 		for (var i in nicks) {
-			words.push(nicks[i]);
+			words.push(nicks[i] + ": ");
 		}
 
 		sidebar.find(".chan")
